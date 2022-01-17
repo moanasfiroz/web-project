@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Booking</title>
+	<link rel="stylesheet" type="text/css" href="design.css">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Click Here.</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+     
+      <center><div class="container">
+		<div class="contact-box">
+			<div class="left"></div>
+			<div class="right">
+				<h2>Contact Us</h2>
+				<input type="text" class="field" placeholder="Your Name" id="name">
+				<input type="Date" class="field" placeholder="Date" id="date">
+                                <input type="text" class="field" placeholder="Age" id="age">
+                                <input type="text" class="field" placeholder="Member" id="member">
+				<input type="text" class="field" placeholder="Phone No" id="phone">
+                                 Male<input type="checkbox" class="field"> Female<input type="checkbox" class="field">
+                                 <p id="errorMessage"></p>
+                                 <span id="main"></span>
+				
+				<input type="button" class="btn" value="Send" onclick="validation()">
+			</div>
+		</div>
+	</div></center>
+
+
+<script>
+
+    function validation(){
+      var Name = document.getElementById('name').value;
+      var Date =document.getElementById('date').value;
+      var Age = document.getElementById('age').value;
+      var Member = document.getElementById('member').value;
+      var Phone = document.getElementById('phone').value;
+    
+     
+    if (Name==""){
+        document.getElementById('main').innerHTML = "Please fill Name";
+        document.getElementById('main').style.color = "red";
+        document.getElementById('name').style.background = "red";
+        return;
+
+      } else document.getElementById('main').style.color = "white";
+             document.getElementById('name').style.background = "green";
+  
+    if (Date==""){
+          document.getElementById('main').innerHTML = "please fill date";
+          document.getElementById('main').style.color = "red";
+          document.getElementById('date').style.background = "red";
+          return;
+        
+      }else document.getElementById('main').style.color = "white";
+            document.getElementById('date').style.background = "green";
+
+
+    if (Age==""){
+        document.getElementById('main').innerHTML ="PLease fill Age";
+        document.getElementById('main').style.color = "red";
+        document.getElementById('age').style.background = "red";
+        return;
+
+    }else document.getElementById('main').style.color = "white";
+           document.getElementById('age').style.background = "green";
+
+    if (Member == ""){
+        document.getElementById('main').innerHTML = "Please Fill Member";
+        document.getElementById('main').style.color = "red";
+        document.getElementById('member').style.background = "red";
+        return;
+    }else document.getElementById('main').style.color = "white";
+           document.getElementById('member').style.background = "green";
+
+    if (Phone == ""){
+         document.getElementById('main').innerHTML = "Please fill Phone Number";
+         document.getElementById('main').style.color = "red";
+         return;
+
+
+     }   
+
+        var currentlocation = window.location.href;
+        document.getElementById('errorMessage').style.display = "none";
+        alert("Thank you For Booking"); 
+
+
+         $.ajax({
+            type : "POST",
+            url : "dbm.php",
+            data : {Name:Name, Date:Date, Age:Age, Member:Member, Phone:Phone, page:currentlocation},
+
+
+
+           });
+                window.location.href = currentlocation;
+
+    }
+
+</script>
+</body>
+</html>
